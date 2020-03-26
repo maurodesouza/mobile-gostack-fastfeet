@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Delivery from './Delivery';
 
 import { signOut } from '~/store/modules/user/actions';
-import { firtsLetters } from '~/util/regex';
+import { firtsLetters, onlyTwoNames } from '~/util/regex';
 import api from '~/services/api';
 
 import * as S from './styles';
@@ -52,7 +52,7 @@ export default function Deliveries() {
 
         <S.UserInfo>
           <S.Text>Bem vindo de volta,</S.Text>
-          <S.Name>{profile.name}</S.Name>
+          <S.Name>{onlyTwoNames(profile.name)}</S.Name>
         </S.UserInfo>
 
         <S.LogoutButton onPress={() => dispatch(signOut())}>
