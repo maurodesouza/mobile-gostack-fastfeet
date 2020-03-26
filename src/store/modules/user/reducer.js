@@ -24,7 +24,9 @@ export default function user(state = INITIAL_STATE, action) {
         break;
       }
       case '@user/SIGN_OUT': {
-        draft = INITIAL_STATE;
+        draft.profile = null;
+        draft.signed = false;
+        draft.loading = false;
         break;
       }
       default:
