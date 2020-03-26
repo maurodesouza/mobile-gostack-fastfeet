@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Delivery from './Delivery';
 
 import { signOut } from '~/store/modules/user/actions';
+import { firtsLetters } from '~/util/regex';
 import api from '~/services/api';
 
 import * as S from './styles';
@@ -41,7 +42,13 @@ export default function Deliveries() {
   return (
     <S.Container>
       <S.Header>
-        <S.Avatar source={{ uri: profile.avatar.url }} />
+        {profile.avatar ? (
+          <S.Avatar source={{ uri: profile.avatar.url }} />
+        ) : (
+          <S.NoAvatar>
+            <S.NoAvatarText>{firtsLetters(profile.name)}</S.NoAvatarText>
+          </S.NoAvatar>
+        )}
 
         <S.UserInfo>
           <S.Text>Bem vindo de volta,</S.Text>

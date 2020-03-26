@@ -17,6 +17,21 @@ export const Avatar = styled.Image`
   border-radius: 34px;
 `;
 
+export const NoAvatar = styled.View`
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 34px;
+  background: #f4effc;
+`;
+
+export const NoAvatarText = styled.Text`
+  color: #a28fd0;
+  text-transform: uppercase;
+  font-size: 31px;
+`;
+
 export const UserInfo = styled.View`
   flex: 1;
   margin-left: 12px;

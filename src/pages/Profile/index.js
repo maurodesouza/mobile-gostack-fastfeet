@@ -3,6 +3,7 @@ import { format, parseISO } from 'date-fns';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { signOut } from '~/store/modules/user/actions';
+import { firtsLetters } from '~/util/regex';
 import * as S from './styles';
 
 export default function Profile() {
@@ -11,7 +12,13 @@ export default function Profile() {
 
   return (
     <S.Container>
-      <S.Avatar source={{ uri: profile.avatar.url }} />
+      {profile.avatar ? (
+        <S.Avatar source={{ uri: profile.avatar.url }} />
+      ) : (
+        <S.NoAvatar>
+          <S.NoAvatarText>{firtsLetters(profile.name)}</S.NoAvatarText>
+        </S.NoAvatar>
+      )}
 
       <S.Text>Nome Completo</S.Text>
       <S.Strong>{profile.name}</S.Strong>

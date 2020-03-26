@@ -16,6 +16,23 @@ export const Avatar = styled.Image`
   margin-bottom: 40px;
 `;
 
+export const NoAvatar = styled.View`
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 136px;
+  height: 136px;
+  border-radius: 68px;
+  margin-bottom: 40px;
+  background: #f4effc;
+`;
+
+export const NoAvatarText = styled.Text`
+  color: #a28fd0;
+  text-transform: uppercase;
+  font-size: 60px;
+`;
+
 export const Text = styled.Text`
   font-size: 12px;
   color: #666;
