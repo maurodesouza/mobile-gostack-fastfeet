@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StatusBar } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -24,9 +25,41 @@ export default function createRouter(signed = false) {
     <>
       <StatusBar barStyle="dark-content" backgroundColor="#fff" />
 
-      <Tab.Navigator>
-        <Tab.Screen name="Dashboard" component={Dashboard} />
-        <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Navigator
+        tabBarOptions={{
+          activeTintColor: '#7d40e7',
+          inactiveTintColor: '#999',
+          style: {
+            height: 70,
+            paddingBottom: 12,
+            paddingTop: 12,
+          },
+          labelStyle: {
+            fontSize: 14,
+            fontFamily: 'Roboto-Regular',
+          },
+        }}
+      >
+        <Tab.Screen
+          name="Dashboard"
+          component={Dashboard}
+          options={{
+            tabBarLabel: 'Entregas',
+            tabBarIcon: ({ ...rest }) => (
+              <Icon name="view-headline" size={25} color={rest.color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Meu perfil',
+            tabBarIcon: ({ ...rest }) => (
+              <Icon name="account-circle" size={25} color={rest.color} />
+            ),
+          }}
+        />
       </Tab.Navigator>
     </>
   );
