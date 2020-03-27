@@ -44,6 +44,7 @@ export default function createRouter(signed = false) {
           name="Dashboard"
           component={Dashboard}
           options={{
+            unmountOnBlur: true,
             tabBarLabel: 'Entregas',
             tabBarIcon: ({ ...rest }) => (
               <Icon name="view-headline" size={25} color={rest.color} />
