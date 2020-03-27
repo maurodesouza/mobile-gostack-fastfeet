@@ -1,4 +1,6 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 
@@ -8,6 +10,8 @@ import StepIndicator from 'react-native-step-indicator';
 import * as S from './styles';
 
 export default function Delivery({ delivery }) {
+  const { navigate } = useNavigation();
+
   const labels = [`Aguardando \n retirada`, 'Retirada', 'Entregue'];
 
   const currentPosition = {
@@ -46,7 +50,9 @@ export default function Delivery({ delivery }) {
 
         <S.Wrapper>
           <S.Text> </S.Text>
-          <S.Link>Ver detalhes</S.Link>
+          <S.Link onPress={() => navigate('Details', { delivery })}>
+            Ver detalhes
+          </S.Link>
         </S.Wrapper>
       </S.Info>
     </S.Container>
