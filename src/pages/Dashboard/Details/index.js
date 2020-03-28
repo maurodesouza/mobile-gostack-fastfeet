@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { format, parseISO } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,6 +9,7 @@ import Background from '~/components/Background';
 import * as S from './styles';
 
 export default function DeliveryDetails() {
+  const { navigate } = useNavigation();
   const {
     params: {
       delivery,
@@ -74,7 +75,11 @@ export default function DeliveryDetails() {
               <S.ActionText>Informar{'\n'}Problema</S.ActionText>
             </S.Action>
 
-            <S.Action border haveProblem={!delivery.have_problem}>
+            <S.Action
+              border
+              haveProblem={!delivery.have_problem}
+              onPress={() => navigate('Problems', { id: delivery.id })}
+            >
               <Icon name="information-outline" size={20} color="#E7BA40" />
               <S.ActionText>Visualizar{'\n'}Problemas</S.ActionText>
             </S.Action>
