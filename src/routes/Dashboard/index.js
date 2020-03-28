@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Deliveries from '~/pages/Dashboard/Deliveries';
 import Details from '~/pages/Dashboard/Details';
+import Problems from '~/pages/Dashboard/Problems';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -45,6 +46,11 @@ export default function Dashboard() {
           name="Details"
           component={Details}
           options={{ title: 'Detalhes da encomenda' }}
+        />
+        <Screen
+          name="Problems"
+          component={Problems}
+          options={{ title: 'Visualizar problemas' }}
         />
       </Navigator>
     </>
