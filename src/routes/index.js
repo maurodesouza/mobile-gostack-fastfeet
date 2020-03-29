@@ -29,10 +29,13 @@ export default function createRouter(signed = false) {
         tabBarOptions={{
           activeTintColor: '#7d40e7',
           inactiveTintColor: '#999',
+          keyboardHidesTabBar: true,
           style: {
             height: 70,
-            paddingBottom: 12,
+          },
+          tabStyle: {
             paddingTop: 12,
+            paddingBottom: 12,
           },
           labelStyle: {
             fontSize: 14,
