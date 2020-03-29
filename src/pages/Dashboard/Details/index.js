@@ -70,7 +70,9 @@ export default function DeliveryDetails() {
 
         {!delivery.end_date && (
           <S.MenuActions>
-            <S.Action>
+            <S.Action
+              onPress={() => navigate('InformProblem', { id: delivery.id })}
+            >
               <Icon name="close-circle-outline" size={20} color="#E74040" />
               <S.ActionText>Informar{'\n'}Problema</S.ActionText>
             </S.Action>
