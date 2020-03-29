@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Deliveries from '~/pages/Dashboard/Deliveries';
 import Details from '~/pages/Dashboard/Details';
 import Problems from '~/pages/Dashboard/Problems';
+import InformProblem from '~/pages/Dashboard/InformProblem';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -51,6 +52,11 @@ export default function Dashboard() {
           name="Problems"
           component={Problems}
           options={{ title: 'Visualizar problemas' }}
+        />
+        <Screen
+          name="InformProblem"
+          component={InformProblem}
+          options={{ title: 'Informar problema' }}
         />
       </Navigator>
     </>
