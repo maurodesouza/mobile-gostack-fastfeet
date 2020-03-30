@@ -9,17 +9,22 @@ import Deliveries from '~/pages/Dashboard/Deliveries';
 import Details from '~/pages/Dashboard/Details';
 import Problems from '~/pages/Dashboard/Problems';
 import InformProblem from '~/pages/Dashboard/InformProblem';
+import Camera from '~/pages/Dashboard/Camera';
+import Confirm from '~/pages/Dashboard/Confirm';
 
 const { Navigator, Screen } = createStackNavigator();
 
 export default function Dashboard() {
   const route = useRoute();
 
-  const isNotDeliveryRoute = route.state && route.state.index !== 0;
+  const RouteName = route.state && route.state.routes[route.state.index].name;
+
+  if (RouteName === 'Camera') StatusBar.setHidden(true);
+  else StatusBar.setHidden(false);
 
   return (
     <>
-      {isNotDeliveryRoute && (
+      {RouteName && RouteName !== 'Deliveries' && (
         <StatusBar barStyle="light-content" backgroundColor="#7d40e7" />
       )}
 
@@ -57,6 +62,18 @@ export default function Dashboard() {
           name="InformProblem"
           component={InformProblem}
           options={{ title: 'Informar problema' }}
+        />
+        <Screen
+          name="Camera"
+          component={Camera}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Screen
+          name="Confirm"
+          component={Confirm}
+          options={{ title: 'Confirmar entrega' }}
         />
       </Navigator>
     </>
