@@ -46,12 +46,18 @@ export default function createRouter(signed = false) {
         <Tab.Screen
           name="Dashboard"
           component={Dashboard}
-          options={{
-            unmountOnBlur: true,
-            tabBarLabel: 'Entregas',
-            tabBarIcon: ({ ...rest }) => (
-              <Icon name="view-headline" size={25} color={rest.color} />
-            ),
+          options={({ route }) => {
+            const RouteName =
+              route.state && route.state.routes[route.state.index].name;
+
+            return {
+              unmountOnBlur: true,
+              tabBarLabel: 'Entregas',
+              tabBarVisible: RouteName !== 'Camera',
+              tabBarIcon: ({ ...rest }) => (
+                <Icon name="view-headline" size={25} color={rest.color} />
+              ),
+            };
           }}
         />
         <Tab.Screen
