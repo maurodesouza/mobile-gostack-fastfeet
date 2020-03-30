@@ -86,8 +86,15 @@ export default function DeliveryDetails() {
               <S.ActionText>Visualizar{'\n'}Problemas</S.ActionText>
             </S.Action>
 
-            <S.Action>
+            <S.Action
+              onPress={
+                delivery.start_date
+                  ? () => navigate('Camera', { id: delivery.id })
+                  : null
+              }
+            >
               <Icon name="check-circle-outline" size={20} color="#7D40E7" />
+
               <S.ActionText>
                 {delivery.start_date ? 'Confirmar' : 'Retirar'}
                 {'\n'}Entrega
