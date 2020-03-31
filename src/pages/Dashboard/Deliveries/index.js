@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Delivery from './Delivery';
@@ -15,6 +16,8 @@ export default function Deliveries() {
   const [state, setState] = useState('pendente');
 
   const [page, setPage] = useState(1);
+
+  const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
   const profile = useSelector(({ user }) => user.profile);
@@ -36,8 +39,8 @@ export default function Deliveries() {
   }, [state, page, profile.id]);
 
   useEffect(() => {
-    loadDeliveries();
-  }, [loadDeliveries]);
+    if (isFocused) loadDeliveries();
+  }, [loadDeliveries, isFocused]);
 
   return (
     <S.Container>
