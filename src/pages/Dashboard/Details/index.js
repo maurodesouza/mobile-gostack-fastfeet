@@ -1,14 +1,18 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
+import { useSelector } from 'react-redux';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { format, parseISO } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import api from '~/services/api';
 import Background from '~/components/Background';
 import * as S from './styles';
 
 export default function DeliveryDetails() {
+  const deliveryman_id = useSelector(({ user }) => user.profile.id);
+
   const { navigate } = useNavigation();
   const {
     params: {
@@ -18,6 +22,19 @@ export default function DeliveryDetails() {
   } = useRoute();
 
   const addressFormatted = `${recipient.street}, ${recipient.number}, ${recipient.city} - ${recipient.state} ${recipient.zip_code}`;
+
+  const deliveryWithdrawn = async () => {
+    try {
+      await api.put(`deliveries/${delivery.id}/withdrawn`, { deliveryman_id });
+
+      Alert.alert('Sucesso', 'Encomenda retirada com sucesso !');
+      navigate('Deliveries');
+    } catch (err) {
+      const { error } = err.response.data;
+
+      Alert.alert('Ocorreu um erro !', error);
+    }
+  };
 
   return (
     <Background>
@@ -90,7 +107,7 @@ export default function DeliveryDetails() {
               onPress={
                 delivery.start_date
                   ? () => navigate('Camera', { id: delivery.id })
-                  : null
+                  : () => deliveryWithdrawn()
               }
             >
               <Icon name="check-circle-outline" size={20} color="#7D40E7" />
