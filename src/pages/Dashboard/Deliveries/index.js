@@ -16,17 +16,25 @@ export default function Deliveries() {
   const [state, setState] = useState('pendente');
 
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const per_page = 5;
   const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
   const profile = useSelector(({ user }) => user.profile);
 
   const loadDeliveries = useCallback(async () => {
+    setLoading(true);
+
     const response = await api.get(`/deliverymans/${profile.id}/deliveries`, {
       params: {
         state,
         page,
+        per_page,
       },
     });
 
@@ -35,8 +43,26 @@ export default function Deliveries() {
       idFormatted: `00${delivery.id}`.slice(-2),
     }));
 
+    const pageTotal = Math.ceil(response.headers['x-total-count'] / per_page);
+
     setDeliveries(d => (page === 1 ? data : [...d, ...data]));
+    setTotalPages(pageTotal);
+    setLoading(false);
+    setRefreshing(false);
   }, [state, page, profile.id]);
+
+  const loadMore = async () => {
+    if (loading || page >= totalPages) return;
+
+    setPage(page + 1);
+  };
+
+  const refresh = () => {
+    setRefreshing(true);
+
+    if (page === 1) loadDeliveries();
+    else setPage(1);
+  };
 
   useEffect(() => {
     if (isFocused) loadDeliveries();
@@ -82,6 +108,20 @@ export default function Deliveries() {
       <S.List
         data={deliveries}
         keyExtractor={delivery => String(delivery.id)}
+        onEndReachedThreshold={0.2}
+        onEndReached={loadMore}
+        onRefresh={refresh}
+        refreshing={refreshing}
+        ListFooterComponent={
+          loading && !refreshing && <S.Loading size="large" />
+        }
+        ListEmptyComponent={
+          !loading && (
+            <S.NoResult>
+              <S.NoResultText> Nenhuma encomenda encontrada ! </S.NoResultText>
+            </S.NoResult>
+          )
+        }
         renderItem={({ item }) => <Delivery delivery={item} />}
       />
     </S.Container>

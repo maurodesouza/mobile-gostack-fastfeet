@@ -76,3 +76,22 @@ export const List = styled.FlatList.attrs({
 })`
   margin-top: 10px;
 `;
+
+export const Loading = styled.ActivityIndicator.attrs({
+  color: '#7d40e7',
+})`
+  margin-bottom: 30px;
+`;
+
+export const NoResult = styled.View`
+  flex: 1;
+  margin-top: 60px;
+  align-items: center;
+`;
+
+export const NoResultText = styled.Text`
+  text-align: center;
+  font-size: 22px;
+  color: #333;
+  font-weight: bold;
+`;
