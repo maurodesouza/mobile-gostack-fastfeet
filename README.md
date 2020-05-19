@@ -60,7 +60,9 @@ Para instalar e executar o projeto você precisa:
 3. Entrar na pasta rodando `cd mobile-gostack-fastfeet`;
 4. Rodar `yarn` para instalar as dependências;
 5. Criar um arquivo `.env` da raiz do projeto e preencher as variáveis de acordo com o arquivo `.env.example`
-6. Com o seu emulador conectado, rodar `yarn android` ou `yarn ios` para iniciar o projeto.
+6. Com o seu emulador conectado, rodar `yarn android` para iniciar o projeto.
+
+_OBS: Testado apenas para android_
 
 ## :rocket: Principais tecnologias
 
